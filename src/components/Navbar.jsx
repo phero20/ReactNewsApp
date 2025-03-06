@@ -1,13 +1,10 @@
-import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import PropTypes from 'prop-types'
 import { useState } from "react";
-import logo from "../assets/freepik-gradient-news-group-logo-202503021014508DQW.png"; // Import the logo
+import logo from "../assets/news-report.png"; // Import the logo
 
-
-const Navbar = () => {
+const Navbar = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLink, setSelectedLink] = useState("General");
+  const [selectedLink, setSelectedLink] = useState("Home");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,28 +16,43 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-white fixed dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+      <nav
+        className={` fixed ${
+          props.dark1
+            ? "bg-gray-900 border-gray-600"
+            : "bg-white border-gray-200 shadow-2xl shadow-slate-400"
+        } w-full z-20 top-0 start-0 border-b  `}
+      >
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link
-            to="/"
-            className="flex items-center  rtl:space-x-reverse"
-          >
-            <img
-              src={logo}
-              className="h-10"
-              alt="Flowbite Logo"
-            />
-            <span className="self-center text-2xl font-bold whitespace-nowrap text-blue-600">
+          <div  className="flex items-center rtl:space-x-reverse">
+            <img src={logo} className="h-10" alt="Newss" />
+            <span className={`self-center text-2xl font-bold whitespace-nowrap text-blue-600`}>
               NEWS
             </span>
-          </Link>
-         
-          <div className="flex md:order-2  md:space-x-0 rtl:space-x-reverse">
-          <div className="ar md:hidden text-blue-600 font-bold text-lg flex justify-center items-center">CATEGORIES <span style={{ fontSize: '1.9rem',paddingBottom:'7px' }}>&rarr;</span></div>
+          </div>
+          <div className="flex">
+            <div className="flex lg:hidden text-blue-600 font-bold text-lg items-center">
+              CATEGORIES
+              <svg
+              className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1 5h12m0 0L9 1m4 4L9 9"
+              />
+            </svg>
+            </div>
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 ml-0 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-10 h-10 ml-0 justify-center text-sm  rounded-lg lg:hidden text-gray-400 bg-transparent focus:ring-gray-600"
               aria-controls="navbar-sticky"
               aria-expanded={isMenuOpen}
               onClick={toggleMenu}
@@ -49,7 +61,7 @@ const Navbar = () => {
               <svg
                 className="w-5 h-5"
                 aria-hidden="true"
-                xmlns="http://wwww3org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 17 14"
               >
@@ -66,30 +78,69 @@ const Navbar = () => {
           <div
             className={`items-center justify-between ${
               isMenuOpen ? "block" : "hidden"
-            } w-full md:flex md:w-auto md:order-1`}
+            } w-full lg:flex lg:w-auto lg:order-1`}
             id="navbar-sticky"
           >
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className={`flex flex-col p-4 lg:p-0 mt-4 font-medium border  ${props.dark1 ? 'bg-gray-800 lg:bg-gray-900 border-gray-700 ' :'border-gray-100 rounded-lg lg:bg-white  bg-gray-300' }  lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 `}>
               <li>
                 <Link
-                  to="/general"
-                  className={`block py-2 px-3 rounded-sm md:p-0 hover:text-blue-700${
-                    selectedLink === "General"
-                      ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  to="/world"
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
+                    selectedLink === "World"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
                   }`}
-                  onClick={() => handleLinkClick("General")}
+                  onClick={() => handleLinkClick("World")}
                 >
-                  General
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/politics"
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
+                    selectedLink === "Politics"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
+                  }`}
+                  onClick={() => handleLinkClick("Politics")}
+                >
+                  Politics
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/education"
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
+                    selectedLink === "Education"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
+                  }`}
+                  onClick={() => handleLinkClick("Education")}
+                >
+                  Education
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/crime"
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
+                    selectedLink === "Crime"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
+                  }`}
+                  onClick={() => handleLinkClick("Crime")}
+                >
+                  Crime
                 </Link>
               </li>
               <li>
                 <Link
                   to="/business"
-                  className={`block py-2 px-3 rounded-sm md:p-0 ${
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
                     selectedLink === "Business"
-                      ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
                   }`}
                   onClick={() => handleLinkClick("Business")}
                 >
@@ -99,24 +150,23 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/entertainment"
-                  className={`block py-2 px-3 rounded-sm md:p-0 ${
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
                     selectedLink === "Entertainment"
-                      ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
                   }`}
                   onClick={() => handleLinkClick("Entertainment")}
                 >
                   Entertainment
                 </Link>
               </li>
-
               <li>
                 <Link
                   to="/health"
-                  className={`block py-2 px-3 rounded-sm md:p-0 ${
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
                     selectedLink === "Health"
-                      ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
                   }`}
                   onClick={() => handleLinkClick("Health")}
                 >
@@ -126,10 +176,10 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/science"
-                  className={`block py-2 px-3 rounded-sm md:p-0 ${
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
                     selectedLink === "Science"
-                      ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
                   }`}
                   onClick={() => handleLinkClick("Science")}
                 >
@@ -139,10 +189,10 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/sports"
-                  className={`block py-2 px-3 rounded-sm md:p-0 ${
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
                     selectedLink === "Sports"
-                      ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
                   }`}
                   onClick={() => handleLinkClick("Sports")}
                 >
@@ -152,14 +202,27 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/technology"
-                  className={`block py-2 px-3 rounded-sm md:p-0 ${
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
                     selectedLink === "Technology"
-                      ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
                   }`}
                   onClick={() => handleLinkClick("Technology")}
                 >
                   Technology
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/environment"
+                  className={`block py-2 px-3 rounded-sm lg:p-0 ${
+                    selectedLink === "Environment"
+                      ? "text-white bg-blue-700 lg:bg-transparent  lg:text-blue-500"
+                      : `${props.dark1 ? "text-white" : "text-black"}   lg:hover:text-blue-700     border-gray-700`
+                  }`}
+                  onClick={() => handleLinkClick("Environment")}
+                >
+                  Environment
                 </Link>
               </li>
             </ul>
