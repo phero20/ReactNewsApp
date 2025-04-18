@@ -1,4 +1,4 @@
-📰 NewsPulse — React News Web App     
+📰 News — React News Web App     
 
 A sleek and responsive news web application built with React, Vite, Tailwind CSS, and integrated with a News API categories like business, entertainment, health, sports, technology, and more.     
 
